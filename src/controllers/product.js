@@ -212,11 +212,16 @@ exports.updateProduct = async (req, res) => {
     // if (categoryProductData.length != 0) {
     //   await categoryProduct.bulkCreate(categoryProductData);
     // }
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: "nutech",
+      use_filename: true,
+      unique_filename: true,
+    });
 
     await product.update(
       {
         ...req.body,
-        image: req.file.filename,
+        image: result.public_id,
       },
       {
         where: {
@@ -231,7 +236,7 @@ exports.updateProduct = async (req, res) => {
       data: {
         id,
         data: { product: req.body },
-        image: req?.file?.filename,
+        // image: req?.file?.filename,
       },
     });
   } catch (error) {
