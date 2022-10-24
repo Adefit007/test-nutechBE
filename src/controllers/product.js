@@ -71,7 +71,6 @@ exports.addProduct = async (req, res) => {
 
     const data = {
       name: req.body.name,
-      desc: req.body.desc,
       sellPrice: req.body.sellPrice,
       buyPrice: req.body.buyPrice,
       image: req.file.filename,
