@@ -129,7 +129,7 @@ exports.addProduct = async (req, res) => {
   } catch (error) {
     res.status(500).send({
       status: "failed",
-      message: "server error",
+      message: "Tidak bisa menambahkan product",
     });
   }
 };
