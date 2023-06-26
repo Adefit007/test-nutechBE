@@ -7,11 +7,19 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
-  const schema = Joi.object({
-    name: Joi.string().min(5).required(),
-    email: Joi.string().email().min(5).required(),
-    password: Joi.string().min(4).required(),
-  });
+  // const schema = Joi.object({
+  //   name: Joi.string().min(5).required(),
+  //   email: Joi.string().email().min(5).required(),
+  //   password: Joi.string().min(4).required(),
+  // });
+  Joi.object({
+    // name: Joi.string().min(5).required(),
+    name: Joi.string().min(1).required(),
+    // email: Joi.string().email().min(5).required(),
+    email: Joi.string().min(1).required(),
+    // password: Joi.string().min(4).required(),
+    password: Joi.string().min(1).required(),
+  }); 
 
   const { error } = schema.validate(req.body);
 
@@ -47,7 +55,7 @@ exports.register = async (req, res) => {
       name: req.body.name,
       email: req.body.email,
       password: hashedPassword,
-      status: "customer",
+      status: "admin",
     });
 
     const token = jwt.sign({ id: newUser.id }, process.env.TOKEN_KEY);
