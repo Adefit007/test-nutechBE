@@ -63,17 +63,18 @@ exports.addProduct = async (req, res) => {
       categoryId = categoryId.split(",");
     }
 
-    const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: "nutech",
-      use_filename: true,
-      unique_filename: true,
-    });
+    // const result = await cloudinary.uploader.upload(req.file.path, {
+    //   folder: "nutech",
+    //   use_filename: true,
+    //   unique_filename: true,
+    // });
 
     const data = {
       name: req.body.name,
       sellPrice: req.body.sellPrice,
       buyPrice: req.body.buyPrice,
-      image: result.public_id,
+      image: req.file.filename,
+      // image: result.public_id,
       qty: req.body.qty,
       idUser: req.user.id,
     };
