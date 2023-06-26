@@ -26,6 +26,7 @@ exports.getProducts = async (req, res) => {
               exclude: ["createdAt", "updatedAt"],
             },
           },
+          order: [['id', 'ASC']]
         },
       ],
       attributes: {
