@@ -58,6 +58,18 @@ exports.getProducts = async (req, res) => {
 
 exports.addProduct = async (req, res) => {
   try {
+      const checknameExist = await product.findOne({
+      where: {
+         name: req.body.name,
+      },
+    });
+
+    if (checknameExist) {
+      return res.status(401).send({
+         status: "failed",
+         message: "Nama Sudah Ada",
+      });
+    }
     let { categoryId } = req.body;
 
     if (categoryId) {
